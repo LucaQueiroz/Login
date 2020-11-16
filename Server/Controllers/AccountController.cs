@@ -18,32 +18,27 @@ public class AccountController : Controller
         this.db = db; //Injeção de Dependência!!!
     }
     
-        [HttpGet]
-        public IActionResult Login(string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
-
-        private bool ValidateLogin(string userName, string password)
-        {
-            // For this sample, all logins are successful.
-            return true;
-        }
-
+    [HttpPost]
+    [Route("LoginUser")]
+    public async Task<ActionResult<User>> LoginUser(LoginDto loginDto)
+    {
         
-        [HttpPost("loginuser")]
-        public async Task<ActionResult<User>> LoginUser(LoginDto loginDto)
+        User loggedInUser = await db.Users.Where(u => u.Email == loginDto.Email && u.Password == loginDto.Password).FirstOrDefaultAsync();
+        
+        if (loggedInUser != null)
         {
-            User loggedInUser = await db.Users.Where(u => u.Email == loginDto.Email && u.Password == loginDto.Password).FirstOrDefaultAsync();
-
-            return View();
+            return Ok();
         }
-
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync();
-            return Redirect("/");
+        else
+        {   
+            return NotFound();
         }
+       
     }
 
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync();
+        return Redirect("/");
+    }
+    }

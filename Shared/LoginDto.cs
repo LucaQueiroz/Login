@@ -17,9 +17,6 @@ namespace blazor_mysql2.Shared
         [MinLength(6, ErrorMessage = "Mínimo de 6 caracteres")]
         public string Password { get; set; }
 
-        [Required]
-        public string Nivel { get; set; }
-
     }
 
 }

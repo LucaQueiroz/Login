@@ -41,8 +41,18 @@
     {   
 
         //Enviar dados para o Controller no Backend
-        var teste = await Http.PostAsJsonAsync("/Account/loginuser", user);
-        NavigationManager.NavigateTo("Pedido/CadastroPedido");
+        var teste = await Http.PostAsJsonAsync("/Account/LoginUser", user);
+        if (teste.IsSuccessStatusCode)
+        {
+            
+            NavigationManager.NavigateTo("Pedido/CadastroPedido");    
+        }
+        else
+        {
+            NavigationManager.NavigateTo("User/FazerLogin");
+        }
+        
+        
     }    
 
     private void HandleReset()
@@ -54,7 +64,3 @@
     
 
 }
-
-   
-
-
