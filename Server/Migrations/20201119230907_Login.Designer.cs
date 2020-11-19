@@ -9,8 +9,8 @@ using blazor_mysql2.Server;
 namespace blazormysql2.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20201112190655_login")]
-    partial class login
+    [Migration("20201119230907_Login")]
+    partial class Login
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -146,6 +146,21 @@ namespace blazormysql2.Server.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            AcceptTerms = true,
+                            ConfirmPassword = "123456",
+                            DateOfBirth = new DateTime(1999, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "sobrazinhoOchave@gmail.com",
+                            FirstName = "Luis",
+                            LastName = "Sobral",
+                            MiddleName = "Guilherme",
+                            Password = "123456",
+                            Title = "Sr"
+                        });
                 });
 
             modelBuilder.Entity("blazor_mysql2.Shared.UserDetails", b =>

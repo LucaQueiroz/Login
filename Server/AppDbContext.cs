@@ -1,3 +1,4 @@
+using System;
 using blazor_mysql2.Shared;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ namespace blazor_mysql2.Server
         public DbSet<DetalhePedido> DetalhePedido { get; set; }
 
         public DbSet<UserDetails> UserDetails { get; set; }
+        DateTime data = new DateTime(1999,03,31);
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,7 +31,26 @@ namespace blazor_mysql2.Server
             modelBuilder.Entity<DetalhePedido>()
                 .HasOne(pd => pd.Produto)
                 .WithMany(pr => pr.DetalhePedidos)
-                .HasForeignKey(pd => pd.ProductId);                
-        }
+                .HasForeignKey(pd => pd.ProductId);
+       
+            modelBuilder.Entity<User>().HasData(
+            new User
+            {
+                UserId =1,
+                Title = "Sr",
+                FirstName = "Luis",
+                MiddleName = "Guilherme",
+                LastName = "Sobral",
+                DateOfBirth = data,
+                Email = "sobrazinhoOchave@gmail.com",
+                Password = "123456",
+                ConfirmPassword = "123456",
+                AcceptTerms = true
+            }
+            );
+
+
+        }                
     }
+    
 }

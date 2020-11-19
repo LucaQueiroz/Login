@@ -144,6 +144,21 @@ namespace blazormysql2.Server.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            AcceptTerms = true,
+                            ConfirmPassword = "123456",
+                            DateOfBirth = new DateTime(1999, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "sobrazinhoOchave@gmail.com",
+                            FirstName = "Luis",
+                            LastName = "Sobral",
+                            MiddleName = "Guilherme",
+                            Password = "123456",
+                            Title = "Sr"
+                        });
                 });
 
             modelBuilder.Entity("blazor_mysql2.Shared.UserDetails", b =>

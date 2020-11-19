@@ -23,7 +23,7 @@ public class AccountController : Controller
     public async Task<ActionResult<User>> LoginUser(LoginDto loginDto)
     {
         
-        User loggedInUser = await db.Users.Where(u => u.Email == loginDto.Email && u.Password == loginDto.Password).FirstOrDefaultAsync();
+        User loggedInUser = await db.Users.Where(u => u.Email == loginDto.Email &&  u.Password == loginDto.Password).FirstOrDefaultAsync();
         
         if (loggedInUser != null)
         {
